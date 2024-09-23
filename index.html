@@ -10,14 +10,24 @@
     <h1>Key Management System</h1>
     <button onclick="generateKey()">Generate Key</button>
     <button onclick="deleteKey()">Delete Key</button>
+    <div id="keyDisplay">Generated Key will be displayed here</div>
 
     <script type="module">
         // Import functions from your scripts
         import { generateKey, deleteKey } from './keyManager.js'; // Adjust the path based on your file structure
 
         // Make these functions available globally
-        window.generateKey = generateKey;
-        window.deleteKey = deleteKey;
+        window.generateKey = async () => {
+            const key = await generateKey();
+            if (key) {
+                document.getElementById("keyDisplay").textContent = `Generated Key: ${key}`;
+            }
+        };
+
+        window.deleteKey = async () => {
+            await deleteKey();
+            document.getElementById("keyDisplay").textContent = "Key has been deleted.";
+        };
     </script>
 </body>
 </html>
