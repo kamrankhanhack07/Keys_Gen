@@ -1,13 +1,13 @@
 // Import necessary Firebase SDK functions
 import { initializeApp } from "firebase/app";
-import { getAuth, signInAnonymously, onAuthStateChanged, signOut } from "firebase/auth";
-import { getDatabase, ref, set, remove, onValue } from "firebase/database";
+import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 
 // Your Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBk_A4Nz5Bz9fsFpd2rX56b1Fv4GlY7wCM",
   authDomain: "auto-key-genrate.firebaseapp.com",
-  databaseURL: "https://auto-key-genrate-default-rtdb.firebaseio.com", // Ensure you use the correct Realtime Database URL
+  databaseURL: "https://auto-key-genrate-default-rtdb.firebaseio.com", // Ensure this URL is correct
   projectId: "auto-key-genrate",
   storageBucket: "auto-key-genrate.appspot.com",
   messagingSenderId: "656423303107",
@@ -32,12 +32,11 @@ signInAnonymously(auth)
 // Monitor authentication state changes
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    console.log('User logged in:', user.uid);
-    monitorKeyDeletion(); // Start monitoring key deletion
+    console.log('User is signed in:', user.uid);
   } else {
-    console.log('User logged out');
+    console.log('No user is signed in');
   }
 });
 
 // Export the Firebase components for use in other scripts
-export { auth, db, signOut };
+export { auth, db };
